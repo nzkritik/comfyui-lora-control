@@ -2,3 +2,6 @@ tests/
 .github/
 .gitignore
 .comfyignore
+screenshot.png
+icon.png
+icon.svg

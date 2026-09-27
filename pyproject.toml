@@ -17,6 +17,6 @@ Documentation = "https://github.com/nzkritik/comfyui-lora-control#readme"
 [tool.comfy]
 PublisherId = "nzkritik"
 DisplayName = "LoRA Control"
-Icon = ""
+Icon = "https://raw.githubusercontent.com/nzkritik/comfyui-lora-control/main/icon.png"
 # V3 node API: custom-node comfy_entrypoint arrived in 0.3.48.
 requires-comfyui = ">=0.3.48"

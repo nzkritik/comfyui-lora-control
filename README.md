@@ -18,6 +18,8 @@ filename prefix.
 
 All four are under **loaders › LoRA Control** in the node menu.
 
+![The example workflow: models on the left, the LoRA Control stack in the middle, Z-Image Turbo sampling on the right](screenshot.png)
+
 ## Who this is for
 
 Anyone with more than a handful of LoRAs who wants to try them without
