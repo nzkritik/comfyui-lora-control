@@ -1,0 +1,22 @@
+[project]
+name = "comfyui-lora-control"
+description = "LoRA stacks for ComfyUI: pick LoRAs by hand, by partial name or from a folder, at random or in sequence."
+version = "0.2.0"
+license = { file = "LICENSE" }
+requires-python = ">=3.10"
+dependencies = []
+classifiers = [
+    "Operating System :: OS Independent",
+]
+
+[project.urls]
+Repository = "https://github.com/nzkritik/comfyui-lora-control"
+Documentation = "https://github.com/nzkritik/comfyui-lora-control#readme"
+"Bug Tracker" = "https://github.com/nzkritik/comfyui-lora-control/issues"
+
+[tool.comfy]
+PublisherId = "nzkritik"
+DisplayName = "LoRA Control"
+Icon = ""
+# V3 node API: custom-node comfy_entrypoint arrived in 0.3.48.
+requires-comfyui = ">=0.3.48"
