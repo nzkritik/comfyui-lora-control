@@ -1,5 +1,7 @@
 # LoRA Control for ComfyUI
 
+[![Comfy Registry](https://img.shields.io/badge/Comfy_Registry-comfyui--lora--control-blue)](https://registry.comfy.org/nodes/comfyui-lora-control)
+
 Four nodes for building LoRA stacks: pick LoRAs by hand, by part of their
 name, or from a folder, at random or in sequence, then apply the lot in one go.
 
@@ -30,13 +32,23 @@ move or download files.
 
 ## Install
 
-It isn't on the Comfy Registry (and so ComfyUI-Manager) yet. Clone it into
-`ComfyUI/custom_nodes` and restart ComfyUI:
+LoRA Control is on the [Comfy Registry](https://registry.comfy.org/nodes/comfyui-lora-control),
+so any of these work. Restart ComfyUI afterwards.
 
-```bash
-cd ComfyUI/custom_nodes
-git clone https://github.com/nzkritik/comfyui-lora-control
-```
+- **ComfyUI-Manager**: open the Manager, choose **Custom Nodes Manager**,
+  search for *LoRA Control* and install it.
+- **comfy-cli**:
+
+  ```bash
+  comfy node install comfyui-lora-control
+  ```
+
+- **By hand**: clone it into `ComfyUI/custom_nodes`:
+
+  ```bash
+  cd ComfyUI/custom_nodes
+  git clone https://github.com/nzkritik/comfyui-lora-control
+  ```
 
 No extra Python packages are needed. It uses ComfyUI's V3 node API, so it
 needs ComfyUI 0.3.48 or newer (tested on 0.37).
