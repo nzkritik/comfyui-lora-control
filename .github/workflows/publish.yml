@@ -1,12 +1,13 @@
 name: Publish to Comfy Registry
 
-# Manual for now. Once the repo is public and the REGISTRY_ACCESS_TOKEN secret
-# is set, add a trigger on pushes to main that change pyproject.toml, so every
-# version bump publishes:
-#   push:
-#     branches: [main]
-#     paths: [pyproject.toml]
+# Publishes whenever a push to main changes the version in pyproject.toml.
+# Other edits to pyproject.toml are skipped, since the Registry refuses a
+# version it already has. Run it by hand from the Actions tab to publish the
+# current version again (it fails if that version is already published).
 on:
+  push:
+    branches: [main]
+    paths: [pyproject.toml]
   workflow_dispatch:
 
 permissions:
@@ -18,7 +19,23 @@ jobs:
     runs-on: ubuntu-latest
     if: ${{ github.repository_owner == 'nzkritik' }}
     steps:
-      # The action checks the repo out itself.
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+      - name: Did the version change?
+        id: version
+        run: |
+          now=$(python3 -c "import tomllib; print(tomllib.load(open('pyproject.toml', 'rb'))['project']['version'])")
+          before=$(git show HEAD~1:pyproject.toml 2>/dev/null | python3 -c "import sys, tomllib; print(tomllib.loads(sys.stdin.read())['project']['version'])" 2>/dev/null || echo none)
+          echo "version $before -> $now"
+          if [ "$now" != "$before" ] || [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            echo "publish=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "publish=false" >> "$GITHUB_OUTPUT"
+            echo "::notice::pyproject.toml changed but the version is still $now; not publishing."
+          fi
       - uses: Comfy-Org/publish-node-action@main
+        if: steps.version.outputs.publish == 'true'
         with:
           personal_access_token: ${{ secrets.REGISTRY_ACCESS_TOKEN }}
+          skip_checkout: "true"
